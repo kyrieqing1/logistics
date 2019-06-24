@@ -2,6 +2,7 @@ package com.kyrie.contorller;
 
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,6 +56,7 @@ public class UserController {
     	  }
     	  return "redirect:/user/queryPage";
       }
+      @RequiresRoles("管理员")
       @RequestMapping("/queryPage")
       public String queryPage(Model m, UserDto dto){
     	  PageInfo<User> pageInfo = userService.queryUserByPage(dto);

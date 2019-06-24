@@ -2,6 +2,7 @@ package com.kyrie.service.impl;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import com.kyrie.mapper.UserMapper;
 import com.kyrie.pojo.Role;
 import com.kyrie.pojo.User;
 import com.kyrie.pojo.UserExample;
+import com.kyrie.pojo.UserExample.Criteria;
 import com.kyrie.service.IRoleService;
 import com.kyrie.service.IUserService;
 @Service
@@ -122,5 +124,17 @@ public class UserServiceImpl implements IUserService{
 		PageInfo<User> pageInfo = new PageInfo<>(list);		
 		return pageInfo;
 	}
+
+	@Override
+	public List<User> queryByUserName(User user) {
+		UserExample example = new UserExample();
+       if (user != null) {
+		 if (user.getUserName()!=null&&!"".equals(user.getUserName())) {
+			example.createCriteria().andUserNameEqualTo(user.getUserName());
+		}
+	}
+		return userMapper.selectByExample(example);
+	}
+	
 
 }

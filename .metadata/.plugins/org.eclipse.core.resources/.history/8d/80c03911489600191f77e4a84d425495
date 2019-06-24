@@ -1,0 +1,5 @@
+package com.kyrie.contorller;
+
+public class LoginController {
+
+}

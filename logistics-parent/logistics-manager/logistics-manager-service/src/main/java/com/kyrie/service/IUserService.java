@@ -20,4 +20,5 @@ public interface IUserService {
 	public void updateUserAndRole(UserDto dto);
 	public void deleteUserAndRole(Integer userId);
 	public PageInfo<User> queryUserByPage(UserDto dto);
+	public List<User> queryByUserName(User user);
 }
