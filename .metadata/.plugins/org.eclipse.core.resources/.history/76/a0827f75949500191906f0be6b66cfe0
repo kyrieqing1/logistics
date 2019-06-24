@@ -1,0 +1,5 @@
+package com.kyrie.dto;
+
+public class BasePage {
+
+}

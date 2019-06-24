@@ -1,0 +1,61 @@
+package com.kyrie.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.kyrie.dto.UserDto;
+import com.kyrie.mapper.UserMapper;
+import com.kyrie.pojo.Role;
+import com.kyrie.pojo.User;
+import com.kyrie.pojo.UserExample;
+import com.kyrie.service.IRoleService;
+import com.kyrie.service.IUserService;
+@Service
+public class UserServiceImpl implements IUserService{
+	@Autowired
+   private UserMapper userMapper;
+	@Autowired
+	private IRoleService roleService;
+	@Override
+	public List<User> query() {
+		UserExample example = new UserExample();
+		return userMapper.selectByExample(example);
+	}
+
+	@Override
+	public Integer addUser(User user) {
+		return userMapper.insertSelective(user);
+	}
+
+	@Override
+	public Integer updateUser(User user) {	
+		return userMapper.updateByPrimaryKeySelective(user);
+	}
+
+	@Override
+	public Integer deleteUser(Integer id) {
+		return userMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public User queryById(Integer id) {
+		return userMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public List<Role> queryRole() {
+		return roleService.query();
+	}
+
+	@Override
+	public Integer saveUserAndRole(UserDto dto) {
+		//保存用户信息
+		User user = dto.getUser();
+		//保存用户和角色的关联关系
+		
+		return null;
+	}
+
+}

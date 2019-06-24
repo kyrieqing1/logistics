@@ -1,0 +1,44 @@
+package com.kyrie.contorller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kyrie.dto.UserDto;
+import com.kyrie.pojo.Role;
+import com.kyrie.pojo.User;
+import com.kyrie.service.IUserService;
+
+@Controller
+@RequestMapping("/user")
+public class UserController {
+	@Autowired
+    private IUserService userService;
+	@RequestMapping("/query")
+	public String query(Model m){
+		List<User> list = userService.query();
+		m.addAttribute("list", list);
+		return "user/user";
+	}
+	@RequestMapping("/addUserAndRole")
+	public String queryRole(Integer userId, Model m){
+		//查询所有角色信息
+		List<Role> roles = userService.queryRole();
+		m.addAttribute("roles", roles);
+		if (userId != null) {
+			//表示是修改操作
+			User user = userService.queryById(userId);
+			//查询用户所具有的角色信息
+			List<Role> rs = userService.queryRoleByUserId(userId);
+		}
+		return "user/addUserAndRole";
+	}
+	@RequestMapping("/saveAddUserAndRole")
+	public String saveUserAndRole(UserDto dto){
+		userService.saveUserAndRole(dto);
+		return "redirect:/user/query";
+	}
+}
