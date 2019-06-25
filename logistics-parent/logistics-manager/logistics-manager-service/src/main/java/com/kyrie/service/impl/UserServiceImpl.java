@@ -1,8 +1,9 @@
 package com.kyrie.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
-
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +58,10 @@ public class UserServiceImpl implements IUserService{
 	public Integer saveUserAndRole(UserDto dto) {
 		//保存用户信息
 		User user = dto.getUser();
+		String uuid = UUID.randomUUID().toString();
+		Md5Hash md5 = new Md5Hash(user.getPassword(), uuid, 1024);
+		user.setPassword(md5.toString());
+		user.setU1(uuid);
 		this.addUser(user);
 		//保存用户和角色的关联关系
 		List<Integer> ids = dto.getRoleIds();
@@ -65,7 +70,7 @@ public class UserServiceImpl implements IUserService{
 			this.saveUserIdAndRoleId(user.getUserId(), roleId);	
 			}
 		}
-		return null;
+		return 1;
 	}
 	public void saveUserIdAndRoleId(Integer userId, Integer roleId){
 		this.userMapper.saveUserIdAndRoleId(userId,roleId);

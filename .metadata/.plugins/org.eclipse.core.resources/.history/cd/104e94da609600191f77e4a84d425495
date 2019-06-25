@@ -1,0 +1,16 @@
+package com.kyrie.contorller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kyrie.dto.BasicDataDto;
+
+@Controller
+@RequestMapping("/basic")
+public class BasicController {
+	@RequestMapping("/queryByPage")
+   public String queryByPage(Model m, BasicDataDto dto){
+	   return null;
+   }
+}

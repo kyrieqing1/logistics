@@ -1,0 +1,13 @@
+package com.kyrie.test;
+
+import org.apache.shiro.crypto.hash.Md5Hash;
+
+public class Md5Test {
+
+	public static void main(String[] args) {
+		Md5Hash md5 = new Md5Hash("1111", "viho1", 1024);
+		System.out.println(md5);
+
+	}
+
+}

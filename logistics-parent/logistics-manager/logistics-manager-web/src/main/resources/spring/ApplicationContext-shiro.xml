@@ -6,9 +6,17 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
- 
+    	<!-- 定义凭证匹配器 -->
+ 	<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher" id="credentialsMatcher">
+ 		<!-- 配置散列算法 -->
+ 		<property name="hashAlgorithmName" value="md5"/>
+ 		<!-- 配置散列次数 -->
+ 		<property name="hashIterations" value="1024"/>
+ 	</bean>
     <!-- 注册自定义Realm -->
     <bean class="com.kyrie.realm.MyRealm" id="myRealm">
+        <!-- 配置凭证匹配器 -->
+ 		<property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
     
     <!-- 注册SecurityManager -->

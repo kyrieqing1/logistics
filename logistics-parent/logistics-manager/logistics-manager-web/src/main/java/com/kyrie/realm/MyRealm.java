@@ -11,6 +11,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.SimpleByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kyrie.pojo.Role;
@@ -33,7 +34,8 @@ public class MyRealm extends AuthorizingRealm {
 			return null;
 		}
 		User userBean = list.get(0);
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userBean, userBean.getPassword(),"qing" );
+		SimpleAuthenticationInfo info = 
+				new SimpleAuthenticationInfo(userBean, userBean.getPassword(), new SimpleByteSource(userBean.getU1()), "qing");
 		return info;
 	}
 	@Override

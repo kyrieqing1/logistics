@@ -22,6 +22,7 @@
 			<item value="org.eclipse.jpt.dbws"/>
 			<item value="org.eclipse.emf.codegen.ecore.ui.wizardCategory"/>
 			<item value="org.eclipse.wst.XMLCategory"/>
+			<item value="org.eclipse.ui.Examples"/>
 		</list>
 	</section>
 </section>
